@@ -9,8 +9,14 @@ export const readAllUsers = async () => {
 };
 
 export const readOneUser = async (id) => {
-  return await UsersModel.find(id);
+  return await UsersModel.find({userName});
 };
+
+export const readOneUserWithUserName = async (userName) => {
+  const userArray = await UsersModel.find({userName})
+  return userArray.length === 0 ? null  : userArray[0]
+};
+   
 
 export const updateUser = async (id, updateFields) => {
   return await UsersModel.findByIdAndUpdate(id, updateFields, {
