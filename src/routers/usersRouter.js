@@ -31,19 +31,21 @@ usersRouter.post("/create", async (req, res) => {
 });
 
 // LOGIN
-usersRouter.post("/login", async (req, res) => {
+usersRouter.post('/login', async( req, res ) => {
   const userName = req.body.userName;
   const password = req.body.password;
+  
   const user = await usersController.readOneUserWithUserName(userName);
-  console.log(user);
-  if (user) {
-    req.session.user = user;
-    req.session.save();
-    res.send(`User logged in: ${JSON.stringify(user)}`);
-  } else {
-    res.status(500).send("bad login");
-  }
-});
+  console.log(user)
+	if (user) {
+	    req.session.user = user;
+	    req.session.save();
+	    res.send(`User logged in: ${JSON.stringify(user)}`);
+	} else {
+	    res.status(500).send("bad login");
+	}
+
+})
 
 // READ ALL
 usersRouter.get("/", async (_req, res) => {
